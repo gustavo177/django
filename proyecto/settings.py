@@ -30,14 +30,15 @@ DEBUG = True
 # ALLOWED_HOSTS = []
 
 ## Dominio predeterminasdo que se creo con aplicación web de Azure
-ALLOWED_HOSTS = ['djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.net']
+ALLOWED_HOSTS = ['*']
 
 # # CSRF_TRUSTED_ORIGINS define una lista de orígenes (protocolos, dominios o subdominios) que Django considerará confiables 
 # # para solicitudes que incluyan un token CSRF (Cross-Site Request Forgery).
 # # Esto es especialmente útil cuando usas HTTPS y necesitas validar formularios o solicitudes POST provenientes de dominios externos,
 # # como tu dominio de despliegue en Azure u otros servicios externos.
 
-# CSRF_TRUSTED_ORIGINS = ['djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.net']
+# CSRF_TRUSTED_ORIGINS = ['https://*']
+CSRF_TRUSTED_ORIGINS = ['https://djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.net/']
 
 
 # Application definition
@@ -102,80 +103,80 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 #     }
 # }
 
-# ## Base de datos con NEON para deploy
-# ## https://console.neon.tech/app/projects/wispy-snow-90410261?branchId=br-purple-sunset-a855u0i0&database=bddjango
+## Base de datos con NEON para deploy
+## https://console.neon.tech/app/projects/wispy-snow-90410261?branchId=br-purple-sunset-a855u0i0&database=bddjango
 
-# from os import getenv  # Importa la función getenv para obtener variables de entorno del sistema.
-# from dotenv import load_dotenv  # Importa la función load_dotenv para cargar variables de entorno desde un archivo .env.
-# from urllib.parse import urlparse  # Importa urlparse para analizar la URL de la base de datos.
+from os import getenv  # Importa la función getenv para obtener variables de entorno del sistema.
+from dotenv import load_dotenv  # Importa la función load_dotenv para cargar variables de entorno desde un archivo .env.
+from urllib.parse import urlparse  # Importa urlparse para analizar la URL de la base de datos.
 
-# # Cargar las variables de entorno
-# load_dotenv()  
-# # Este método carga las variables definidas en un archivo .env (ubicado en la raíz del proyecto) en las variables de entorno del sistema.
-# # Es útil para manejar credenciales sensibles como contraseñas y URLs de conexión sin incluirlas directamente en el código fuente.
+# Cargar las variables de entorno
+load_dotenv()  
+# Este método carga las variables definidas en un archivo .env (ubicado en la raíz del proyecto) en las variables de entorno del sistema.
+# Es útil para manejar credenciales sensibles como contraseñas y URLs de conexión sin incluirlas directamente en el código fuente.
 
-# # Obtener la URL desde las variables de entorno
-# database_url = getenv("DATABASE_URL")  
-# # Utiliza la función getenv para leer el valor de la variable de entorno DATABASE_URL.
-# # DATABASE_URL debe ser una URL válida que defina los detalles de la conexión a la base de datos PostgreSQL.
+# Obtener la URL desde las variables de entorno
+database_url = getenv("DATABASE_URL")  
+# Utiliza la función getenv para leer el valor de la variable de entorno DATABASE_URL.
+# DATABASE_URL debe ser una URL válida que defina los detalles de la conexión a la base de datos PostgreSQL.
 
-# if not database_url:  
-#     # Si la variable DATABASE_URL no está configurada, lanza una excepción para informar al desarrollador.
-#     raise ValueError("DATABASE_URL no está configurada en el archivo .env")
+if not database_url:  
+    # Si la variable DATABASE_URL no está configurada, lanza una excepción para informar al desarrollador.
+    raise ValueError("DATABASE_URL no está configurada en el archivo .env")
 
-# # Analizar la URL de la base de datos para obtener sus componentes
-# tmpPostgres = urlparse(database_url)  
-# # Descompone la URL en sus partes (protocolo, usuario, contraseña, host, puerto y path).
-# # Ejemplo:
-# # Si `database_url` = "postgresql://user:password@host:port/database?sslmode=require",
-# # `tmpPostgres` contendrá:
-# # - scheme: "postgresql"
-# # - username: "user"
-# # - password: "password"
-# # - hostname: "host"
-# # - port: "port"
-# # - path: "/database"
+# Analizar la URL de la base de datos para obtener sus componentes
+tmpPostgres = urlparse(database_url)  
+# Descompone la URL en sus partes (protocolo, usuario, contraseña, host, puerto y path).
+# Ejemplo:
+# Si `database_url` = "postgresql://user:password@host:port/database?sslmode=require",
+# `tmpPostgres` contendrá:
+# - scheme: "postgresql"
+# - username: "user"
+# - password: "password"
+# - hostname: "host"
+# - port: "port"
+# - path: "/database"
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',  
-#         # Define el motor de base de datos que usará Django, en este caso PostgreSQL.
-
-#         'NAME': tmpPostgres.path.lstrip('/').decode('utf-8') if isinstance(tmpPostgres.path, bytes) else tmpPostgres.path.lstrip('/'),
-#         # Obtiene el nombre de la base de datos eliminando la barra inicial (/) de `tmpPostgres.path`.
-#         # Si `tmpPostgres.path` es de tipo bytes, lo convierte a una cadena de texto usando `.decode('utf-8')`.
-
-#         'USER': tmpPostgres.username,  
-#         # El usuario de la base de datos, extraído de la URL.
-
-#         'PASSWORD': tmpPostgres.password,  
-#         # La contraseña asociada al usuario, extraída de la URL.
-
-#         'HOST': tmpPostgres.hostname,  
-#         # El nombre del host donde está alojada la base de datos, extraído de la URL.
-
-#         'PORT': tmpPostgres.port or 5432,  
-#         # El puerto en el que la base de datos escucha conexiones.
-#         # Si no se especifica un puerto en la URL, usa el puerto predeterminado para PostgreSQL (5432).
-        
-#         'OPTIONS': {
-#             'sslmode': 'require',
-#         },
-#         # Sirve para habilitar y forzar el uso de una conexión segura (SSL/TLS) entre tu aplicación Django y 
-#         # tu base de datos PostgreSQL. Esto asegura que todos los datos que viajan entre tu servidor y 
-#         # la base de datos estén encriptados, protegiéndolos contra posibles intercepciones o ataques.
-
-#     }
-# }
-
-
-# De forma local
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  
+        # Define el motor de base de datos que usará Django, en este caso PostgreSQL.
+
+        'NAME': tmpPostgres.path.lstrip('/').decode('utf-8') if isinstance(tmpPostgres.path, bytes) else tmpPostgres.path.lstrip('/'),
+        # Obtiene el nombre de la base de datos eliminando la barra inicial (/) de `tmpPostgres.path`.
+        # Si `tmpPostgres.path` es de tipo bytes, lo convierte a una cadena de texto usando `.decode('utf-8')`.
+
+        'USER': tmpPostgres.username,  
+        # El usuario de la base de datos, extraído de la URL.
+
+        'PASSWORD': tmpPostgres.password,  
+        # La contraseña asociada al usuario, extraída de la URL.
+
+        'HOST': tmpPostgres.hostname,  
+        # El nombre del host donde está alojada la base de datos, extraído de la URL.
+
+        'PORT': tmpPostgres.port or 5432,  
+        # El puerto en el que la base de datos escucha conexiones.
+        # Si no se especifica un puerto en la URL, usa el puerto predeterminado para PostgreSQL (5432).
+        
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
+        # Sirve para habilitar y forzar el uso de una conexión segura (SSL/TLS) entre tu aplicación Django y 
+        # tu base de datos PostgreSQL. Esto asegura que todos los datos que viajan entre tu servidor y 
+        # la base de datos estén encriptados, protegiéndolos contra posibles intercepciones o ataques.
+
     }
 }
+
+
+# # De forma local
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
