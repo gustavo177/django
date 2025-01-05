@@ -30,7 +30,7 @@ DEBUG = True
 # ALLOWED_HOSTS = []
 
 ## Dominio predeterminasdo que se creo con aplicación web de Azure
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.net']
 
 # # CSRF_TRUSTED_ORIGINS define una lista de orígenes (protocolos, dominios o subdominios) que Django considerará confiables 
 # # para solicitudes que incluyan un token CSRF (Cross-Site Request Forgery).
