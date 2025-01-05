@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.n
 # # Esto es especialmente útil cuando usas HTTPS y necesitas validar formularios o solicitudes POST provenientes de dominios externos,
 # # como tu dominio de despliegue en Azure u otros servicios externos.
 
-# CSRF_TRUSTED_ORIGINS = ['djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.net']
 
 
 # Application definition
