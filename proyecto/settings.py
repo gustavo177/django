@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['*']
 # # como tu dominio de despliegue en Azure u otros servicios externos.
 
 # CSRF_TRUSTED_ORIGINS = ['https://*']
-CSRF_TRUSTED_ORIGINS = ['https://djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.net/']
+CSRF_TRUSTED_ORIGINS = ['https://djangowebapp-gbgneucag0ccahgv.mexicocentral-01.azurewebsites.net']
 
 
 # Application definition
