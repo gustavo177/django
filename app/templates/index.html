@@ -46,7 +46,20 @@
     <header> <p>Header</p> </Header>
         <div class="contenido">
             <section>
-                <p class="centrar">Section</p>
+                <!-- <p class="centrar">Section</p> -->
+                <table border="1">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                    </tr>
+                    {% for persona in personas %}
+                    <tr>
+                        <td>{{ persona.nombre }}</td>
+                        <td>{{ persona.apellido }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
             </section>
         </div>
         <footer><p>Footer</p></footer>
