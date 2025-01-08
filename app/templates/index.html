@@ -19,7 +19,7 @@
         }
         section{
             background-color: blue;
-            height: 77vh;
+            min-height: 78vh;
             
             display: flex;
             flex-direction: column;
@@ -38,6 +38,12 @@
             left: 44vh; */
 
         }
+
+        img {
+            width: 150px; /* Ajusta según sea necesario */
+            height: 150px;
+            border-radius: 20px;
+        }
         
 
     </style>
@@ -51,11 +57,40 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Apellido</th>
+                        <th>Imagen</th>
+                        <th>Ciudad</th>
+                        
                     </tr>
                     {% for persona in personas %}
                     <tr>
                         <td>{{ persona.nombre }}</td>
                         <td>{{ persona.apellido }}</td>
+
+                        <td>
+                            <ul>
+                                {% for archivo in persona.filearchivo_set.all %}
+                                <ul>
+                                    <!-- URL: {{ archivo.archivo.url }} 
+                                    <br> -->
+                                    <img src="{{ archivo.archivo.url }}" />
+                                </ul>
+                                {% endfor %}
+                            </ul>
+                        </td>
+
+                        <td>
+                            <ul>
+                                <p>{{persona.ciudad}}</p>
+                                {% for ciudad in persona.ciudad_set.all %}
+                                <ul>
+                                    <p>{{ciudad.nombre}}</p>
+                                </ul>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        
+
+
                     </tr>
                     {% endfor %}
                 </table>
@@ -63,5 +98,7 @@
             </section>
         </div>
         <footer><p>Footer</p></footer>
+
+
 </body>
 </html>

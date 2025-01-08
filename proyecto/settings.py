@@ -172,7 +172,7 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 
 
 
-## con servidor de postgresql en Azure
+## Bases de datos con el servidor de postgresql en Azure
 # # Producción
 DATABASES = {
     'default': {
@@ -244,3 +244,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Archivos cargados por el usuario
+MEDIA_URL = '/media/'  # Ruta URL para los archivos cargados
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Ruta absoluta en el sistema de archivos donde se guardan los archivos cargados
