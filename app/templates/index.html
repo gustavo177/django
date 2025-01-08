@@ -44,7 +44,14 @@
             height: 150px;
             border-radius: 20px;
         }
+
+        ul{
+            padding: 0;
+        }
         
+        a{
+            color: white;
+        }
 
     </style>
 </head>
@@ -72,13 +79,14 @@
                                 <ul>
                                     <!-- URL: {{ archivo.archivo.url }} 
                                     <br> -->
-                                    <img src="{{ archivo.archivo.url }}" />
+                                    <img src="{{ archivo.archivo.url }}"     alt="Imagen no disponible"
+                                    />
                                 </ul>
                                 {% endfor %}
                             </ul>
                         </td>
 
-                        
+
                         <td>
                             <ul>
                                 <p>{{persona.ciudad}}</p>

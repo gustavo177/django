@@ -107,12 +107,12 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 ## Base de datos con NEON para deploy
 ## https://console.neon.tech/app/projects/wispy-snow-90410261?branchId=br-purple-sunset-a855u0i0&database=bddjango
 
-# from os import getenv  # Importa la función getenv para obtener variables de entorno del sistema.
-# from dotenv import load_dotenv  # Importa la función load_dotenv para cargar variables de entorno desde un archivo .env.
-# from urllib.parse import urlparse  # Importa urlparse para analizar la URL de la base de datos.
+from os import getenv  # Importa la función getenv para obtener variables de entorno del sistema.
+from dotenv import load_dotenv  # Importa la función load_dotenv para cargar variables de entorno desde un archivo .env.
+from urllib.parse import urlparse  # Importa urlparse para analizar la URL de la base de datos.
 
-# # Cargar las variables de entorno
-# load_dotenv()  
+# Cargar las variables de entorno
+load_dotenv()  
 # # Este método carga las variables definidas en un archivo .env (ubicado en la raíz del proyecto) en las variables de entorno del sistema.
 # # Es útil para manejar credenciales sensibles como contraseñas y URLs de conexión sin incluirlas directamente en el código fuente.
 
@@ -188,6 +188,20 @@ DATABASES = {
     }
 }
 
+# # Integrando Azure Blob Storage
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            'timeout':20,
+            'expiration_secs':500
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
 
 
 ## psql "--host=djangopgadmin.postgres.database.azure.com" "--port=5432" "--dbname=djangodbproducion" "--username=tavo177" "--set=sslmode=require"
@@ -248,3 +262,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Archivos cargados por el usuario
 MEDIA_URL = '/media/'  # Ruta URL para los archivos cargados
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Ruta absoluta en el sistema de archivos donde se guardan los archivos cargados
+
+# Cargando los archivo en Azure Blob Storage
+AZURE_CONTAINER = getenv("AZURE_CONTAINER")
+AZURE_ACCOUNT_NAME = getenv("AZURE_ACCOUNT_NAME")
+AZURE_ACCOUNT_KEY =getenv("AZURE_ACCOUNT_KEY")
