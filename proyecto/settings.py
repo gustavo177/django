@@ -264,6 +264,6 @@ MEDIA_URL = '/media/'  # Ruta URL para los archivos cargados
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Ruta absoluta en el sistema de archivos donde se guardan los archivos cargados
 
 # Cargando los archivo en Azure Blob Storage
-AZURE_CONTAINER = getenv("AZURE_CONTAINER")
-AZURE_ACCOUNT_NAME = getenv("AZURE_ACCOUNT_NAME")
-AZURE_ACCOUNT_KEY =getenv("AZURE_ACCOUNT_KEY")
+AZURE_CONTAINER = os.getenv("AZURE_CONTAINER")
+AZURE_ACCOUNT_NAME = os.getenv("AZURE_ACCOUNT_NAME")
+AZURE_ACCOUNT_KEY =os.getenv("AZURE_ACCOUNT_KEY")
