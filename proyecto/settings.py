@@ -177,11 +177,11 @@ load_dotenv()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangodbproducion',
-        'HOST': 'djangopgadmin.postgres.database.azure.com',
-        'USER': 'tavo177',
-        'PASSWORD': '@GOUsat@123',
-        'PORT': '5432',
+        'NAME': os.getenv("NAME"),
+        'HOST': os.getenv("HOST"),
+        'USER': os.getenv("USER"),
+        'PASSWORD': os.getenv("PASSWORD"),
+        'PORT': os.getenv("PORT"),
         'OPTIONS': {
             'sslmode': 'require',
         },
